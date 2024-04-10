@@ -4,11 +4,16 @@ import './App.css';
 function App() {
   const [name, setName] = useState('');
   const [skill, setSkill] = useState('');
+  const [consultants, setConsultants] = useState([]);
+  let id = 1;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name , skill);
-    //addConsultant({ name, skill });
+    console.log(name , skill); 
+    id++
+    
+    
+    setConsultants([...consultants , { name, skill , id}]);
     setName('');
     setSkill('');
   };
@@ -26,7 +31,20 @@ function App() {
       </label>
       <button type="submit">Add Consultant</button>
     </form>
+
+
     </div>
+    <div>
+  
+    {consultants.map((consultant, index) => (
+            <div key={index}>
+              <h3>{consultant.name}</h3>
+              <p>{consultant.skill}</p>
+             
+            </div>
+          ))}
+  
+</div>
     </>
   );
 }
