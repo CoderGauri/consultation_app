@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(name , skill);
-    addConsultant({ name, skill });
+    //addConsultant({ name, skill });
     setName('');
     setSkill('');
   };
