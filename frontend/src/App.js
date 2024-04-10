@@ -7,6 +7,19 @@ function App() {
   const [consultants, setConsultants] = useState([]);
   let id = 1;
 
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = async () => {
+    try {
+      const response = await axios.get('https://consultation-app-be.onrender.com/api/consultant');
+      console.log(response.data)
+      setConsultants(response.data);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(name , skill); 
