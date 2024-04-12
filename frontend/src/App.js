@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   const [name, setName] = useState('');
-  const [skill, setSkill] = useState('');
+  const [skills, setSkill] = useState('');
   const[cost , setCost] = useState('');
   const [consultants, setConsultants] = useState([]);
   let id = 1;
@@ -15,7 +15,7 @@ function App() {
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get('https://consultation-app-be.onrender.com/api/consultant');
+      const response = await axios.get('https://consultation-app-be.onrender.com/api/consultants');
       console.log(response.data)
       setConsultants(response.data);
     } catch (error) {
@@ -24,11 +24,11 @@ function App() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name , skill , cost); 
+    console.log(name , skills , cost); 
     id++
     
     
-    setConsultants([...consultants , { name, skill ,cost , id}]);
+    setConsultants([...consultants , { name, skills ,cost , id}]);
     setName('');
     setSkill('');
     setCost('');
@@ -43,7 +43,7 @@ function App() {
       </label>
       <label>
         Skill:
-        <input type="text" value={skill} onChange={(e) => setSkill(e.target.value)} />
+        <input type="text" value={skills} onChange={(e) => setSkill(e.target.value)} />
       </label>
       <label>
         Cost per hour:
