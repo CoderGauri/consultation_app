@@ -30,7 +30,7 @@ function App() {
     setConsultants([...consultants , { name, skill ,cost , id}]);
     setName('');
     setSkill('');
-    setCost('')
+    setCost('');
   };
   return (
     <>
