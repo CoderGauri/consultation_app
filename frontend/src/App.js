@@ -58,9 +58,9 @@ function App() {
   
     {consultants.map((consultant, index) => (
             <div key={index}>
-              <h3>{consultant.name}</h3>
-              <p>{consultant.skills}</p>
-              <p>{consultant.cost}</p>
+              <h3>{consultants.name}</h3>
+              <p>{consultants.skills}</p>
+              <p>{consultants.cost}</p>
              
             </div>
           ))}
