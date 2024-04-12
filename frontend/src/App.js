@@ -15,7 +15,7 @@ function App() {
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get('https://consultation-app-be.onrender.com/api/consultant');
+      const response = await axios.get('https://consultation-app-be.onrender.com/api/consultants');
       console.log(response.data)
       setConsultants(response.data);
     } catch (error) {
