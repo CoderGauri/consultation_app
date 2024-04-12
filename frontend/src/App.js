@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   const [name, setName] = useState('');
   const [skill, setSkill] = useState('');
+  const[cost , setCost] = useState('');
   const [consultants, setConsultants] = useState([]);
   let id = 1;
 
@@ -22,11 +23,11 @@ function App() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name , skill); 
+    console.log(name , skill , cost); 
     id++
     
     
-    setConsultants([...consultants , { name, skill , id}]);
+    setConsultants([...consultants , { name, skill ,cost , id}]);
     setName('');
     setSkill('');
   };
@@ -42,6 +43,10 @@ function App() {
         Skill:
         <input type="text" value={skill} onChange={(e) => setSkill(e.target.value)} />
       </label>
+      <label>
+        Cost per hour:
+        <input type="text" value={cost} onChange={(e) => setCost(e.target.value)} />
+      </label>
       <button type="submit">Add Consultant</button>
     </form>
 
@@ -53,6 +58,7 @@ function App() {
             <div key={index}>
               <h3>{consultant.name}</h3>
               <p>{consultant.skill}</p>
+              <p>{consultant.cost}</p>
              
             </div>
           ))}
