@@ -33,23 +33,31 @@ function App() {
     setSkill('');
     setCost('');
   };
+
+  const handleDelete = (index) => {
+    const updatedPosts = [...consultants];
+    updatedPosts.splice(index, 1);
+    setConsultants(updatedPosts);
+  };
   return (
     <>
     <div>
     <form onSubmit={handleSubmit}>
+    <div className="form-group">
       <label>
         Name:
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)}required />
       </label>
       <label>
         Skill:
-        <input type="text" value={skills} onChange={(e) => setSkill(e.target.value)} />
+        <input type="text" value={skills} onChange={(e) => setSkill(e.target.value)}required />
       </label>
       <label>
         Cost per hour:
-        <input type="text" value={cost} onChange={(e) => setCost(e.target.value)} />
+        <input type="text" value={cost} onChange={(e) => setCost(e.target.value)} required/>
       </label>
       <button type="submit">Add Consultant</button>
+      </div>
     </form>
 
 
@@ -61,6 +69,7 @@ function App() {
               <h3>{consultants.name}</h3>
               <p>{consultants.skills}</p>
               <p>{consultants.cost}</p>
+              <button onClick={() => handleDelete(index)}>Delete</button>
              
             </div>
           ))}
