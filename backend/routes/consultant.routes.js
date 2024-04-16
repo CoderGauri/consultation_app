@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Pool } = require('pg');
 
+
 const pool = new Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
@@ -74,6 +75,35 @@ router.route('/update/:id').post(async (req, res) => {
 });
 
 // Delete Consultant
+<
+// router.route('/delete/:id').delete(async (req, res) => {
+//   const { id } = req.params;
+//   const query = 'DELETE FROM consultants WHERE id = $1';
+//   const values = [id];
+
+//   try {
+//     await pool.query(query, values);
+//     res.json('Consultant deleted.');
+//   } catch (err) {
+//     res.status(400).json('Error: ' + err);
+//   }
+// });
+app.delete('/api/consultants/:id', (req, res) => {
+  const consultants_ID = parseInt(req.params.id);
+  connection.query('DELETE FROM posts WHERE consultants_id = $1', [consultants_ID], (err, result) => {
+      if (err) {
+          console.error('Error deleting consultants:', err);
+          res.status(500).json({ message: 'Internal Server Error' });
+          return;
+      }
+      res.json({ consultants_id: consultants_ID, message: 'Consultant deleted successfully' });
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+=======
 router.route('/delete/:id').delete(async (req, res) => {
   const { id } = req.params;
   const query = 'DELETE FROM consultants WHERE id = $1';
@@ -86,5 +116,6 @@ router.route('/delete/:id').delete(async (req, res) => {
     res.status(400).json('Error: ' + err);
   }
 });
+
 
 export default router;
