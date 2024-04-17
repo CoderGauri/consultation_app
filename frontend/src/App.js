@@ -10,10 +10,10 @@ function App() {
   let id = 1;
 
   useEffect(() => {
-    fetchPosts();
+    fetchconsultants();
   }, []);
 
-  const fetchPosts = async () => {
+  const fetchconsultants = async () => {
     try {
       const response = await axios.get(
         "https://consultation-app-be.onrender.com/api/consultants"
@@ -21,7 +21,7 @@ function App() {
       console.log(response.data);
       setConsultants(response.data);
     } catch (error) {
-      console.error("Error fetching posts:", error);
+      console.error("Error fetching consultants:", error);
     }
   };
 
@@ -36,6 +36,16 @@ function App() {
     setName("");
     setSkill("");
     setCost("");
+  };
+
+  const handleDelete = async (consultantID) => {
+    try {
+      await axios.delete(`https://consultation-app-fe.onrender.com/api/consultants/${consultantID}`);
+      // Filter out the deleted post from the state
+      setConsultants(consultants.filter(consultant => consultant.consultant_id !== consultantID));
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
   };
 
   
@@ -83,7 +93,7 @@ return (
           <h3>{consultants.name}</h3>
           <p>{consultants.skills}</p>
           <p>{consultants.cost}</p>
-          {/* <button onClick={() => handleDelete(index)}>Delete</button> */}
+          <button onClick={() => handleDelete(index)}>Delete</button> 
         </div>
       ))}
     </div>
