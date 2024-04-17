@@ -5,7 +5,7 @@ function App() {
   const [cName, setcName] = useState("");
   const [description, setDescription] = useState("");
   const [cost, setCost] = useState("");
-  const [consultants , setConsultants] = useState("");
+  const [consultants , setConsultants] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -56,7 +56,7 @@ function App() {
       <div className="consultant-list">
         <h2>Consultants</h2>
         <ul>
-          {consultantss.map((consultant, index) => (
+          {consultants.map((consultant, index) => (
             <li key={index}>
               <h3>{consultant.cName}</h3>
               <p>{consultant.description}</p>
