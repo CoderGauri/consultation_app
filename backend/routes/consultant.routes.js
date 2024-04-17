@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Pool } = require('pg');
-const PORT = process.env.PORT || 4000;
+
 
 const pool = new Pool({
     user: process.env.DB_USER,
@@ -75,6 +75,7 @@ router.route('/update/:id').post(async (req, res) => {
 });
 
 // Delete Consultant
+<
 // router.route('/delete/:id').delete(async (req, res) => {
 //   const { id } = req.params;
 //   const query = 'DELETE FROM consultants WHERE id = $1';
@@ -102,4 +103,19 @@ app.delete('/api/consultants/:id', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+=======
+router.route('/delete/:id').delete(async (req, res) => {
+  const { id } = req.params;
+  const query = 'DELETE FROM consultants WHERE id = $1';
+  const values = [id];
+
+  try {
+    await pool.query(query, values);
+    res.json('Consultant deleted.');
+  } catch (err) {
+    res.status(400).json('Error: ' + err);
+  }
+});
+
+
 export default router;
