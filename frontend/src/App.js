@@ -18,6 +18,12 @@ function App() {
     setCost("");
   };
 
+  const handleDelete = (index) => {
+    const updatedConsultant = [...consultants];
+    updatedConsultant.splice(index ,1);
+    setConsultants(updatedConsultant);
+  }
+
   return (
     <>
     <div className="App">
@@ -61,6 +67,7 @@ function App() {
               <h3>{consultant.cName}</h3>
               <p>{consultant.description}</p>
               <p>{consultant.cost}</p>
+              <button onClick={() => handleDelete(index)}>Delete</button>
             </li>
           ))}
         </ul>
