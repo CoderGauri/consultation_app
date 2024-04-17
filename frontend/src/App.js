@@ -3,7 +3,7 @@ import React , {useState} from 'react'
 function App() {
   return (
     <div className="App">
-      <h1></h1>
+      <h1>Healing Together</h1>
       </div>
   )
 }
