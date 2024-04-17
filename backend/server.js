@@ -81,7 +81,7 @@ app.post('/api/consultants', (req, res) => {
     });
 });
 
-// Get all posts
+// Get all consultants
 app.get('/api/consultants', (req, res) => {
     connection.query('SELECT * FROM consultants', (err, results) => {
         if (err) {
@@ -94,9 +94,9 @@ app.get('/api/consultants', (req, res) => {
 });
 
 // Get a single post by ID
-app.get('/api/posts/:id', (req, res) => {
+app.get('/api/consultants/:id', (req, res) => {
     const postId = parseInt(req.params.id);
-    connection.query('SELECT * FROM posts WHERE post_id = $1', [postId], (err, results) => {
+    connection.query('SELECT * FROM consultants WHERE post_id = $1', [postId], (err, results) => {
         if (err) {
             console.error('Error getting post:', err);
             res.status(500).json({ message: 'Internal Server Error' });
@@ -111,10 +111,10 @@ app.get('/api/posts/:id', (req, res) => {
 });
 
 // Update a post by ID
-app.put('/api/posts/:id', (req, res) => {
+app.put('/api/consultants/:id', (req, res) => {
     const postId = parseInt(req.params.id);
     const { postName, description } = req.body;
-    const query = 'UPDATE posts SET postname = $1, description = $2 WHERE post_id = $3 RETURNING *';
+    const query = 'UPDATE consultants SET postname = $1, description = $2 WHERE post_id = $3 RETURNING *';
     const values = [postName, description, postId];
     connection.query(query, values, (err, result) => {
         if (err) {
@@ -127,9 +127,9 @@ app.put('/api/posts/:id', (req, res) => {
 });
 
 // Delete a post by ID
-app.delete('/api/posts/:id', (req, res) => {
+app.delete('/api/consultants/:id', (req, res) => {
     const postId = parseInt(req.params.id);
-    connection.query('DELETE FROM posts WHERE post_id = $1', [postId], (err, result) => {
+    connection.query('DELETE FROM consultants WHERE post_id = $1', [postId], (err, result) => {
         if (err) {
             console.error('Error deleting post:', err);
             res.status(500).json({ message: 'Internal Server Error' });
