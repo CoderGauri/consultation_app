@@ -5,10 +5,13 @@ function App() {
   const [cName, setcName] = useState("");
   const [description, setDescription] = useState("");
   const [cost, setCost] = useState("");
+  const [consultants , setConsultants] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log({ cName, description, cost });
+    const newConsultant = {cName , description , cost};
+    setConsultants ([...consultants , newConsultant]);
 
     setcName("");
     setDescription("");
@@ -16,6 +19,7 @@ function App() {
   };
 
   return (
+    <>
     <div className="App">
       <h1>Healing Together</h1>
       <form onSubmit={handleSubmit}>
@@ -49,7 +53,20 @@ function App() {
         </div>
         <button type="submit">Submit</button>
       </form>
+      <div className="consultant-list">
+        <h2>Consultants</h2>
+        <ul>
+          {consultantss.map((consultant, index) => (
+            <li key={index}>
+              <h3>{consultant.cName}</h3>
+              <p>{consultant.description}</p>
+              <p>{consultant.cost}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
+    </>
   );
 }
 
