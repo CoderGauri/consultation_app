@@ -33,4 +33,25 @@ After executing the handleSubmit function, the form data is processed, the posts
 =>setPosts(updatedPosts);: Finally, the setPosts function is called with the updated array (updatedPosts) to update the state of posts and trigger a re-render of the component.
 =><button>: This is an HTML button element.
 =>onClick={() => handleDelete(index)}: This sets up an event listener for the click event on the button. When the button is clicked, the handleDelete function is called with the index of the post to be deleted as an argument. The index is passed as an argument to handleDelete because the button is usually rendered within a loop where index identifies the specific post to delete.
-=>
+=>Edit Post
+=>handleEdit Function
+=>handleEdit is a function that is called when the "Edit" button is clicked for a particular post.
+=>It sets the editIndex state to the index of the post being edited.
+=>It retrieves the post's name and description from the posts array using the provided index, and sets the editPostName , editDescription and editAuthor states accordingly.
+=>handleUpdate Function
+=>handleUpdate is a function called when the "Update" button is clicked within the edit form.
+=>It creates a copy of the posts array.
+=>It updates the post at editIndex with the new values provided in editPostName  editDescription and editAuthor.
+=>It sets the posts state with the updated array of posts.
+=>It resets the editIndex state to null, indicating that editing mode is no longer active.
+=>handleCancelEdit Function
+=>handleCancelEdit is a function called when the "Cancel" button is clicked within the edit form.
+=>It resets the editIndex state to null.
+=>It resets the editPostName , editDescription and editAuthorstates to empty strings.
+=>Rendering the List of Posts
+=>Inside the <ul> element, each post is mapped to a list item using the map function.
+=>If editIndex matches the current index, it renders an edit form with input fields populated with the current post's data.
+=>If not, it renders the post details along with "Edit" and "Delete" buttons.
+=>Clicking the "Edit" button calls handleEdit, allowing the user to edit the post.
+=>Clicking the "Delete" button calls handleDelete, allowing the user to delete the post.
+
