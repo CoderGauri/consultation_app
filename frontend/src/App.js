@@ -1,107 +1,108 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 
+
 function App() {
-  const [cName, setcName] = useState("");
-  const [description, setDescription] = useState("");
-  const [cost, setCost] = useState("");
-  const [consultants , setConsultants] = useState([]);
+  const[posts , setPosts] = useState([]);
+  const [postName , setPostName] = useState('');
+  const [description , setDescription] = useState('');
+  const [author , setAuthor] = useState('');
   const [editIndex, setEditIndex] = useState(null);
-  const [editcName, setEditcName] = useState('');
+  const [editPostName, setEditPostName] = useState('');
   const [editDescription, setEditDescription] = useState('');
-  const [editCost , setEditCost] = useState('');
+  const [editAuthor, setEditAuthor] = useState('');
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log({ cName, description, cost });
-    const newConsultant = {cName , description , cost};
-    setConsultants ([...consultants , newConsultant]);
+event.preventDefault();
+console.log("Submitted: ", { postName, description , author});
+const newPost = {postName , description , author};
+setPosts([...posts ,newPost]);
+setPostName('');
+setDescription('');
+setAuthor('');
 
-    setcName("");
-    setDescription("");
-    setCost("");
-  };
-
+  }
   const handleEdit = (index) => {
     setEditIndex(index);
-    setEditcName(consultants[index].cName);
-    setEditDescription(consultants[index].description);
+    setEditPostName(posts[index].postName);
+    setEditDescription(posts[index].description);
+    setEditAuthor(posts[index].author)
   };
-
   const handleUpdate = (event) => {
     event.preventDefault();
-    const updatedConsultant = [...consultants];
-    updatedConsultant[editIndex] = { cName: editcName, description: editDescription };
-    setConsultants(updatedConsultant);
+    const updatedPosts = [...posts];
+    updatedPosts[editIndex] = { postName: editPostName, description: editDescription ,author: editAuthor};
+    setPosts(updatedPosts);
     setEditIndex(null);
   };
-
   const handleCancelEdit = () => {
     setEditIndex(null);
-    setEditcName('');
+    setEditPostName('');
     setEditDescription('');
+    setEditAuthor('');
   };
-
-
   const handleDelete = (index) => {
-    const updatedConsultant = [...consultants];
-    updatedConsultant.splice(index ,1);
-    setConsultants(updatedConsultant);
+    const updatedPosts = [...posts];
+    updatedPosts.splice(index ,1);
+    setPosts(updatedPosts);
   }
-
   return (
-    <>
     <div className="App">
-      <h1>Healing Together</h1>
+      <h1>Create a New Blog Post</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="cName">Consultant Name:</label>
+          <label htmlFor="postName">Post Name:</label>
           <input
             type="text"
-            id="cName"
-            value={cName}
-            onChange={(e) => setcName(e.target.value)}
+            id="postName"
+            value={postName}
+            onChange={(e) => {
+              setPostName(e.target.value);
+            }}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="description">Description:</label>
-          <textarea
+          <label htmlFor="description">Description</label>
+          <input
+            type="text"
             id="description"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="cost">Cost:</label>
-          <textarea
-            id="cost"
-            value={cost}
-            onChange={(e) => setCost(e.target.value)}
-            required
-          />
+          <label htmlFor="author">Author</label>
+          <input
+          type="text"
+          id="author"
+          value={author}
+          onChange={(e) => {setAuthor(e.target.value)}}
+          required/>
         </div>
         <button type="submit">Submit</button>
       </form>
-      <div className="consultant-list">
-        <h2>Consultants</h2>
-        <ul>
-          {consultants.map((consultant, index) => (
+      <div className="post-list">
+            <h2>Posts</h2>
+            <ul>
+          {posts.map((post, index) => (
             <li key={index}>
-               {editIndex === index ? (
+                            {editIndex === index ? (
                 <form onSubmit={handleUpdate}>
                   <div className="form-group">
-                    <label htmlFor="editcName">Edit  Name:</label>
+                    <label htmlFor="editPostName">Edit Post Name:</label>
                     <input
                       type="text"
-                      id="editcName"
-                      value={editcName}
-                      onChange={(e) => setEditcName(e.target.value)}
+                      id="editPostName"
+                      value={editPostName}
+                      onChange={(e) => setEditPostName(e.target.value)}
                       required
                     />
-                    </div>
-                    <div className="form-group">
+                  </div>
+                  <div className="form-group">
                     <label htmlFor="editDescription">Edit Description:</label>
                     <textarea
                       id="editDescription"
@@ -109,36 +110,34 @@ function App() {
                       onChange={(e) => setEditDescription(e.target.value)}
                       required
                     />
-                    </div>
-                    <div className="form-group">
-                    <label htmlFor="editCost">Edit Cost:</label>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="editAuthor">Edit Author:</label>
                     <textarea
-                      id="editCost"
-                      value={editCost}
-                      onChange={(e) => setEditCost(e.target.value)}
+                      id="editAuthor"
+                      value={editAuthor}
+                      onChange={(e) => setEditAuthor(e.target.value)}
                       required
                     />
-                     </div>
-                     <button type="submit">Update</button>
+                  </div>
+                  <button type="submit">Update</button>
                   <button type="button" onClick={handleCancelEdit}>Cancel</button>
                 </form>
               ) : (
-
-               <>
-                  <h3>{consultant.cName}</h3>
-                  <p>{consultant.description}</p>
-                  <h2>{consultant.cost}</h2>
-                  <button onClick={() => handleEdit(index)}>Edit</button>
-                  <button onClick={() => handleDelete(index)}>Delete</button>
-                </>
-            
-          )}
-          </li>
+                <>
+              <h3>{post.postName}</h3>
+              <p>{post.description}</p>
+              <p>{post.author}</p>
+              <button onClick={() => handleEdit(index)}>Edit</button>
+              <button onClick={()=> handleDelete(index)}>Delete</button>
+              </>
+              )}
+            </li>
           ))}
         </ul>
+
       </div>
     </div>
-    </>
   );
 }
 
