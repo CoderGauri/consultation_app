@@ -15,3 +15,13 @@ Blog-App step wise(Frontend)
 1. The current state stored in a variable 
 2. A function that updates the state.
 =>Any changes made in the input tag  , would trigger the event , which would eventually change the state.
+=>Now in order to store the data in the form of an array and render it we need to follow following steps
+=>Creating a New Post Object:
+const newPost = { postName, description };: This line creates a new object named newPost using object shorthand notation. It takes the current values of postName and description from the component's state and assigns them to properties with the same names in the newPost object.
+=>Updating the Posts State:
+setPosts([...posts, newPost]);: This line updates the posts state by adding the newPost object to the existing array of posts. It uses the spread operator (...) to create a new array with all the existing posts (posts) and adds the newPost object to the end.
+=>Resetting Input Fields:
+setPostName('');: This line resets the postName state to an empty string, clearing the input field for the post name. This ensures that after submitting a post, the input field is cleared for the user to enter a new post name.
+setDescription('');: Similarly, this line resets the description state to an empty string, clearing the textarea input field for the post description.
+After executing the handleSubmit function, the form data is processed, the posts state is updated with the new post, and the input fields are cleared for the user to submit another post if desired. This function encapsulates the logic for handling form submission in the component.
+=>
